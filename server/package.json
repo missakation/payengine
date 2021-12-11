@@ -3,9 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./www/main.js"
+    "start": "node ./www/main.js",
+    "dash": "node tools/dash.js",
+    "seed": "npm run dash seed",
+    "init": "npm run dash setup-db",
+    "serve-be": "npm run dash serve-be"
   },
   "dependencies": {
+    "commander": "^8.3.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
@@ -13,6 +18,7 @@
     "jade": "~1.11.0",
     "knex": "^0.95.14",
     "morgan": "~1.9.1",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "shelljs": "^0.8.4"
   }
 }
