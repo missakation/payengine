@@ -6,8 +6,7 @@
     "start": "node ./www/main.js",
     "dash": "node tools/dash.js",
     "seed": "npm run dash seed",
-    "init": "npm run dash setup-db",
-    "serve-be": "npm run dash serve-be"
+    "init": "npm run dash setup-db"
   },
   "dependencies": {
     "axios": "^0.24.0",

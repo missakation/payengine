@@ -18,5 +18,6 @@ exports.createMerchandise = async (userId, merchandiseId) => {
         data: data
     };
     const result = await axios(config);
+
     return result.data;
 }

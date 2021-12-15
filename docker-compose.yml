@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  dashboard_postgres:
+    container_name: dashboard_postgres
+    image: postgres:13.4-alpine
+    restart: unless-stopped
+    volumes:
+      - ./docker/volumes/pgdata/dashboard:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DASHBOARD_POSTGRES_DB}
+      POSTGRES_USER: ${DASHBOARD_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${DASHBOARD_POSTGRES_PASS}
+    ports:
+      - 5433:5432
+
+  dashboard_backend:
+    container_name: dashboard_backend
+    depends_on:
+      - dashboard_postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: develop
+    volumes:
+      - .:/app
+      - exclude:/app/node_modules
+    ports:
+      - 3333:3333
+    env_file: ./.env
+
+volumes:
+  exclude:
