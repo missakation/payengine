@@ -6,7 +6,7 @@ const Onboarding = (props) => {
     useEffect(() => {
         // Load Payengine on first render only
         loadPayengine({
-            publicKey: "pk_test_c7KVO3IThAzU0uBq8fbSXJ8rBUJ60mo4",
+            publicKey: "pk_test_7XSU9zBEjm8IxWXIJfzgl98Ic0sC27Yw",
         }).then((error) => {
             console.log(error)
         });
@@ -15,12 +15,6 @@ const Onboarding = (props) => {
 
     return (
         <>
-            <h1>
-                {props.merchandiseId}
-            </h1>
-            <h1>
-                {props.merchandiseHash}
-            </h1>
             <pay-engine
                 type="boarding"
                 merchant-id={props.merchandiseId}
