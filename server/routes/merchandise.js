@@ -5,16 +5,13 @@ var ExternalService = require('../services/external-service')
 var router = express.Router();
 const crypto = require("crypto");
 
-// Defining key
-const secret = 'PENGY64';
-
 router.post('/', async (req, res, next) => {
   const merchandise = await ExternalService.createMerchandise();
   const merchandiseId = merchandise.data.id;
 
   const hash = crypto.createHmac(
     "sha256",
-    secret
+    process.env.PAYENGINE_PRIVATE_KEY
   ).update(merchandiseId).digest("hex")
 
   await UserService.updateUserMerchantId(1, merchandiseId, hash);

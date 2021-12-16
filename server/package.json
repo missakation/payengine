@@ -6,6 +6,7 @@
     "start": "node ./www/main.js",
     "dash": "node tools/dash.js",
     "seed": "npm run dash seed",
+    "migrate": "npm run dash migrate",
     "init": "npm run dash setup-db"
   },
   "dependencies": {

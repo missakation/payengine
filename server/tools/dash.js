@@ -60,4 +60,9 @@ program
     .description("Serves the backend")
     .action(serveBe);
 
+program
+    .command("migrate")
+    .description("Migrates the database")
+    .action(runMigrations);
+
 program.parse(process.argv);

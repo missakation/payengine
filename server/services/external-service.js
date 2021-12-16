@@ -12,7 +12,7 @@ exports.createMerchandise = async (userId, merchandiseId) => {
         method: 'post',
         url: 'https://console.payengine.dev/api/merchant',
         headers: {
-            'Authorization': `Basic ${process.env.PAYENGINE_PUBLIC_URL}`,
+            'Authorization': `Basic ${process.env.PAYENGINE_PRIVATE_KEY}`,
             'Content-Type': 'application/json'
         },
         data: data
