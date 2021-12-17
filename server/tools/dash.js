@@ -10,7 +10,7 @@ function setupDb() {
         shell.exit(1);
     }
     shell.exec(
-        `docker run -d -p 5433:5432 --name payengine -e POSTGRES_USER=payengineuser -e POSTGRES_PASSWORD=payenginepassword -e POSTGRES_DB=payengine postgres`
+        `docker run -d -p 5432:5432 --name payengine -e POSTGRES_USER=payengineuser -e POSTGRES_PASSWORD=payenginepassword -e POSTGRES_DB=payengine postgres`
     );
     shell.echo(
         `Created dev db container: payengine it will run when you start the backend`

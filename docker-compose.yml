@@ -1,32 +1,42 @@
 version: "3"
 services:
-  # postgres_db:
-  #   container_name: postgres_db
-  #   image: "postgres:latest"
-  #   environment:
-  #   - POSTGRES_USER=payengineuser
-  #   - POSTGRES_PASSWORD=payenginepassword
-  #   - POSTGRES_DB=payengine
-  #   ports:
-  #   - 5433:5432
+  postgres-db:
+    container_name: postgres-db
+    image: "postgres:latest"
+    networks:
+      - payenginenetwork #:
+        # ipv4_address: 127.0.0.3
+    volumes:
+      - /home/nana/docker/volumes/pgdata/payengine/data
+    environment:
+      - POSTGRES_USER=payengineuser
+      - POSTGRES_PASSWORD=payenginepassword
+      - POSTGRES_DB=payengine
+    ports:
+      - 5432:5432
+    network_mode: payenginenetwork-net
 
   server:
     container_name: server
-    # depends_on:
-    #   - postgres_db
+    depends_on:
+      - postgres-db
+    networks:
+      - payenginenetwork #:
+        # ipv4_address: 127.0.0.4
+    network_mode: payenginenetwork-net
+    links:
+      - postgres-db
+    environment:
+      - DB_HOST=postgres-db
     build:
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
       context: "./"
 
-    #  volumes:
-    #    - /app/node_modules
-    #    - ./server:/app
-    # environment:
-    #   DATABASE_URL: google.com
-    #   DATABASE_USERNAME: payengineuser
-    #   DATABASE_PASSWORD: payenginepassword
-    #   DATABASE_PORT: 5433
-    #   DATABASE_NAME: payengine
     env_file: server/.env
     ports:
       - 3333:3333
+
+networks:
+  payenginenetwork:
+    driver: bridge
+    external: false

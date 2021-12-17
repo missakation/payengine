@@ -5,8 +5,8 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      host: 'localhost',
-      port: 5433,
+      host: process.env.DB_HOST,
+      port: 5432,
       database: 'payengine',
       user: 'payengineuser',
       password: 'payenginepassword'
@@ -14,7 +14,7 @@ module.exports = {
     pool: {
       min: 2,
       max: 10
-    },
+    }, 
     migrations: {
       tableName: 'knex_migrations'
     },

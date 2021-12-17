@@ -1,19 +1,17 @@
-FROM node:14 AS client
+FROM node:16 AS client
 WORKDIR /app
-COPY client/package.json client/package-lock.json .
+COPY client/package.json client/package-lock.json ./
 RUN npm install
 COPY client .
 RUN npm run build
 
-FROM node:14
+FROM node:16
 WORKDIR /app
-COPY server/package.json server/package-lock.json .
+COPY server/package.json server/package-lock.json ./
 RUN npm install
 RUN npm install knex -g
 COPY server .
 COPY --from=client /app/build public
+COPY start-server.sh /app/
 EXPOSE 3333
-RUN knex migrate:latest
-RUN knex seed:run
-RUN npm run start
-
+ENTRYPOINT bash start-server.sh
