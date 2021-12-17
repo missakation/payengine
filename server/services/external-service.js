@@ -1,7 +1,7 @@
 var axios = require('axios');
 const knex = require('../db/ormConfig')
 
-exports.createMerchandise = async (userId, merchandiseId) => {
+exports.createMerchandise = async () => {
     var data = {
         external_id: "1",
         email: "service-tital@live.com",

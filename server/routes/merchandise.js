@@ -1,5 +1,4 @@
 var express = require('express');
-// import { environment } from "../environments/environment.development.js"
 var UserService = require('../services/users-service')
 var ExternalService = require('../services/external-service')
 var router = express.Router();
